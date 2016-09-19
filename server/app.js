@@ -47,6 +47,24 @@ app.get( '/getAll', function( req, res ){
 }); // end get all
 
 // put update a task to complete
+app.put( '/completeMe', urlencodedParser, function( req, res ){
+    console.log( 'in completeMe:', req.body );
+    // send back something to trigger ajax success
+    // connect to db
+    pg.connect( connectionString, function( err, client, done ){
+      if( err ){
+        console.log( err );
+      }
+      else{
+        // update the record with this ID to have "complete" as true
+        client.query( 'UPDATE todos SET complete=true WHERE id=' + req.body.id );
+        // let it know we're done
+        done();
+        // send something back
+        res.send( true );
+      }
+    }); // end pg connect
+}); // end complete me
 
 // post to create a new task
 

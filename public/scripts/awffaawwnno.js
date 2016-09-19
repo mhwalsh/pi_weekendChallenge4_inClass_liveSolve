@@ -7,6 +7,20 @@ $( document ).ready( function(){
     // get id from clicked button
     var id = $( this ).attr( 'myId' );
     console.log( 'in body on click for completeMe class:', id );
+    // send to server to update db
+    // assemble an objectToSend
+    var objectToSend={
+      id: id
+    }; // end object to send
+    // ajax call
+    $.ajax({
+      url: '/completeMe',
+      type: 'PUT',
+      data: objectToSend,
+      success: function( data ){
+        console.log( 'successful ajax:', data );
+      } // end success
+    }); //end ajax
   }); // end body on click for completeMe class
 
   showTasks();
