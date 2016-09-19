@@ -21,6 +21,29 @@ app.get( '/', function( req, res ){
 // get all tasks
 app.get( '/getAll', function( req, res ){
   console.log( 'in getAll' );
+  // connect to db
+  pg.connect( connectionString, function( err, client, done ){
+    if( err ){
+      console.log( err );
+    } // end error
+    else{
+      console.log( 'connected to db' );
+      // array to hold our results
+      var resultsArray = [];
+      // get all the things from table and hold the query results in a variable
+      var queryResults = client.query( 'SELECT * FROM todos' );
+      queryResults.on( 'row', function( row ){
+        // push each row into results array
+        resultsArray.push( row );
+      }); //end on row
+      queryResults.on( 'end', function(){
+        // let the db know we are done
+        done();
+        // send back to client
+        res.send( resultsArray );
+      });
+    } // end no error
+  }); // end pg connect
 });
 // put update a task to complete
 
