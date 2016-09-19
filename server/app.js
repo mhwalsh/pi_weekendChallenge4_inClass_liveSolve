@@ -41,10 +41,11 @@ app.get( '/getAll', function( req, res ){
         done();
         // send back to client
         res.send( resultsArray );
-      });
+      }); // end on end
     } // end no error
   }); // end pg connect
-});
+}); // end get all
+
 // put update a task to complete
 
 // post to create a new task
