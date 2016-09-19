@@ -19,7 +19,9 @@ app.get( '/', function( req, res ){
 });
 
 // get all tasks
-
+app.get( '/getAll', function( req, res ){
+  console.log( 'in getAll' );
+});
 // put update a task to complete
 
 // post to create a new task
