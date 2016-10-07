@@ -4,7 +4,7 @@ var path = require( 'path' );
 var bodyParser = require( 'body-parser' );
 var urlencodedParser = bodyParser.urlencoded( { extended: false } );
 var pg = require( 'pg' );
-var connectionString = 'postgres://localhost:5432/todo';
+var connectionString = require('../modules/connection');
 var port = process.env.PORT || 8027;
 
 // spin up server
